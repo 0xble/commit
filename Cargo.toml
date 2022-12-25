@@ -1,0 +1,23 @@
+[package]
+name = "commit"
+license = "MIT"
+edition = "2021"
+version = "0.1.0"
+readme = "README.md"
+categories = ["command-line-utilities"]
+homepage = "https://github.com/0xble/commit"
+repository = "https://github.com/0xble/commit"
+authors = ["Brian Le <brian@brianle.xyz>"]
+description = "Generate commit messages using GPT-3 based on your changes and commit history."
+
+[dependencies]
+clap = { version = "4.0.29", features = ["derive"] }
+dialoguer = "0.10.2"
+colored = "2.0.0"
+reqwest = { version = "0.11.13", default-features = false, features = ["json", "blocking", "native-tls-crate", "default-tls", "hyper-tls", "__tls"] }
+serde_json = { version = "1.0.89", default-features = false }
+spinners = "4.1.0"
+bat = { version = "0.22.1", default-features = false, features = ["regex-onig"] }
+words-count = "0.1"
+regex = "1"
+clipboard = "0.5.0"
