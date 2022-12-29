@@ -94,8 +94,16 @@ pub fn generate_commit_message(
             commit = value["choices"][0]["text"]
                 .as_str()
                 .unwrap_or_else(|| {
-                    println!("{}", "Failed to generate commit message.".red());
-                    std::process::exit(1);
+                    if value["error"]["message"].is_string() {
+                        println!(
+                            "{}",
+                            format!("{}", value["error"]["message"].to_string()).red()
+                        );
+                        std::process::exit(1);
+                    } else {
+                        println!("{}", "Nothing returned from GPT-3.".red());
+                        std::process::exit(1);
+                    }
                 })
                 .trim()
                 .trim_start_matches("\"")
@@ -109,7 +117,7 @@ pub fn generate_commit_message(
     }
 
     if commit.is_empty() {
-        println!("{}", "Nothing returned from GPT-3".red());
+        println!("{}", "Nothing returned from GPT-3.".red());
         std::process::exit(1);
     }
 
